@@ -1,13 +1,14 @@
-import Search from "./components/Search";
+// import Search from "./components/Search";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Movies from "./components/Movies";
 import DetailsMovies from "./components/DetailsMovies";
+import Auto from "./components/AutoSuggest";
 
 function Appcontainer() {
   return (
     <>
       <Router>
-        <Search />
+        <Auto />
         <Switch>
           <Route exact path="/movies" component={Movies}></Route>
           <Route

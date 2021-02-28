@@ -28,7 +28,7 @@ function DetailsMovies() {
           </div>
         </>
       ) : (
-        <div className="card-parent">
+        <div className="card-details">
           <div className="card card-style">
             <img
               src={details.Poster}
@@ -37,7 +37,9 @@ function DetailsMovies() {
             />
           </div>
           <div className="card details font">
-            <strong>{details.Title}</strong>
+            <strong>
+              {details.Title} {"(" + details.Year + ")"}
+            </strong>
             <br></br>
             <br></br>
             imdbRating:{details.imdbRating}

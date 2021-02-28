@@ -1,9 +1,10 @@
+import "../css/auto.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { debounce } from "lodash";
 import "../css/search.css";
-function Search() {
+function AutoSuggest() {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [auto, setAuto] = useState(true);
@@ -11,7 +12,7 @@ function Search() {
   const history = useHistory();
   useEffect(() => {
     setAuto(true);
-    // history.replace("/");
+    history.replace("/");
     fetch(`http://www.omdbapi.com/?s=${search}&apikey=a0fa3b48`)
       .then((data) => data.json())
       .then((result) => {
@@ -41,36 +42,36 @@ function Search() {
   return (
     <>
       <form onSubmit={submit}>
-        <div class="topnav">
-          <Link class="active" to="/">
-            Home
-          </Link>
-          <input type="text" placeholder="Search.." onChange={db} />
-        </div>
-        {/* <span class="active" style={{ color: "white" }}>
-          Home
-        </span> */}
-        <div class="auto-parent">
-          {auto &&
-            data.map((value) => {
-              return (
-                <>
-                  <li
-                    class="auto-children"
-                    onClick={() => {
-                      setAuto(false);
-                      history.push("/moviedetails/" + value.imdbID);
-                    }}
-                  >
-                    {value.Title}
-                  </li>
-                </>
-              );
-            })}
+        <div className="wrapper">
+          <div className="search-input">
+            {/* <a href="" target="_blank" hidden></a> */}
+            <input type="text" placeholder="Find Movies.." onChange={db} />
+            <div className="autocom-box">
+              {auto &&
+                data.map((value) => {
+                  return (
+                    <>
+                      <div
+                        className="list"
+                        onClick={() => {
+                          setAuto(false);
+                          history.push("/moviedetails/" + value.imdbID);
+                        }}
+                      >
+                        {value.Title}
+                      </div>
+                    </>
+                  );
+                })}
+            </div>
+            <div className="icon">
+              <i className="fas fa-search"></i>
+            </div>
+          </div>
         </div>
       </form>
     </>
   );
 }
 
-export default Search;
+export default AutoSuggest;
