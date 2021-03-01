@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../css/card.css";
 import img from "../image/loading.gif";
+import imgNotFound from "../image/imNotFound.png";
 function DetailsMovies() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -30,11 +31,19 @@ function DetailsMovies() {
       ) : (
         <div className="card-details">
           <div className="card card-style">
-            <img
-              src={details.Poster}
-              style={{ width: "100%", height: "100%", borderRadius: "5px" }}
-              alt=""
-            />
+            {details.Poster !== "N/A" ? (
+              <img
+                src={details.Poster}
+                style={{ width: "100%", height: "300px", borderRadius: "5px" }}
+                alt=""
+              />
+            ) : (
+              <img
+                src={imgNotFound}
+                style={{ width: "100%", height: "300px", borderRadius: "5px" }}
+                alt=""
+              />
+            )}
           </div>
           <div className="card details font">
             <strong>
